@@ -1,48 +1,98 @@
-import React from 'react';
-// import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
+import logo from './../../img/ioasys.png';
+import bookstitle from './../../img/books.png';
+import logoutimg from './../../img/logout.png';
+import axios from 'axios';
+//import { axiosRequests } from 'services/api';
 
 function PagesHome(token) {
 
-  // const httpClient = axios.create({
-  //   baseURL: "https://books.ioasys.com.br/api/v1/",
-  //   // baseURL: process.env.APP_API_BASE_URL,
-  // });
+  const [posts, setPosts] = useState([]);
 
-  // httpClient.interceptors.request.use(function (config) {
-  //     const token = localStorage.getItem('token');
-  //     config.headers.Authorization =  token ? `Bearer ${token}` : '';
-  //     return config;
-  // });
+  function axiosRequests() {
+    try {
 
-  // const [user, setUser] = useState();
+      let webApiUrlPost = 'https://books.ioasys.com.br/api/v1/auth/sign-in';
+      let webApiUrlGet = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=25&category=biographies';
+      let tokenStr = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzIyNjM4OTg1NzgsImlhdCI6MTYzMjI2NzQ5ODU3OH0.9m7RsKbnxfZvtIn64i9oYqZUMpXd04lc2krnyem5KR8';
 
-  //   useEffect(() => {
-  //     api
-  //       .get("https://books.ioasys.com.br/api/v1/books?page=1&amount=25&category=biographies") 
-  //       .then(
-  //           // (response) => setUser(response.data))
-  //           (response) => console.log(response.data))
-  //       .catch((err) => {
-  //         console.error("ops! ocorreu um erro" + err);
-  //       });
-  //   }, []);
-    
+      let resp = axios.post(webApiUrlPost,{
+          email: "desafio@ioasys.com.br",
+          password: "12341234"
+      });
+
+      axios.get(webApiUrlGet, {
+          headers: {
+            "Authorization" : `Bearer ${tokenStr}`,
+          }
+        })
+        .then(
+          respget => {
+            setPosts(respget.data.data);
+            console.log("Response do GET: ", respget.data);
+            console.log("Response do GET: ", respget.data.data[0].title);
+          }
+        );
+
+      console.log("Response do POST: ", resp);
+
+      } catch(err) {
+          console.error("ops! ocorreu um erro no post" + err);
+      }
+}
+
+  useEffect(() => {
+    axiosRequests();
+  }, [])
+
   function removeToken() {
     localStorage.removeItem("token");
     window.location.reload();
   }
 
+  
+
   return (
     <div className="pages-home">
-      Livros aqui
-      <br />
-      <button type="button" onClick={removeToken}> Sair </button>
-      
-      {/* <p>Usuário: {user.login}</p>
-      <p>Biografia: {user.bio}</p> */}
+
+      <div class="header">
+        <div className="header__left"> 
+          <img src={logo} className="logo" alt="logo"/>
+          <img src={bookstitle} className="bookstitle" alt="bookstitle"/>
+        </div>
+        <div className="header__right">
+          <div className="user__greeting">
+            <span className="welcome">Bem vindo,</span> 
+            <span>Guilherme</span>
+          </div>
+          <img src={logoutimg} className="logoutimg" alt="logout" onClick={removeToken} />
+        </div>
+      </div>
+
+      <div className="content">
+        <ul>
+          {posts.map(post => (
+            <li key={post.id} className="booklist"> 
+              <div className="cardbook">
+                <div className="cardbook__left">
+                  <img src={`${post.imageUrl}`} className="bookcover" alt="book cover" />
+                </div>
+                <div className="cardbook__right">
+                  <div className="title"> {post.title} </div>
+                  <div className="authors"> {post.authors[0]}  </div>
+                  <div className="pageCount"> {post.pageCount} páginas</div>
+                  <div className="publisher"> Editora {post.publisher} </div>
+                  <div className="published"> Publicado em {post.published} </div> 
+                </div>
+              </div>  
+            </li>
+          ))}
+        </ul>
+      </div>
+
     </div>
-  )
+  );
   
 };
 

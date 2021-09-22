@@ -2,9 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import StoreContext from 'components/Store/Context';
 import UIButton from 'components/UI/Button/Button';
-
 import './Login.css';
-import axios from 'axios';
 
 function initialState() {
   return { user: '', password: ''};
@@ -31,21 +29,6 @@ const UserLogin = () => {
   function onSubmit(event) {
     event.preventDefault();
     setToken("token-teste");
-    
-
-    const instance = axios.create({
-      baseURL: 'https://books.ioasys.com.br/api/v1/',
-      timeout: 1000,
-      headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE3MTYzYWZhZjVkZTIyYjgwNGExNzMiLCJ2bGQiOjE2MzIyNDQ0MzE5ODIsImlhdCI6MTYzMjI0ODAzMTk4Mn0.NgXp93h1kivQuNX4pVmbyXplLQ38QnPuzaSDXQxtADw'}
-    });
-    
-    instance.get('https://books.ioasys.com.br/api/v1/books?page=1&amount=25&category=biographies')
-    .then(response => {
-        let books = response.data;
-        console.log(response.data);
-        return books;
-    })
-
     history.push("/");
 
     setValues(initialState);  //reseta valores do form caso nao tenha token

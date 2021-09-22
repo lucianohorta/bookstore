@@ -1,6 +1,112 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+
 .pages-home {
-  width: 400px;
   margin: 0 auto;
   font-size: 30px;
-  margin-top: 50px;
+  background-image: url("./../../img/bg.png");
+}
+
+.pages-home ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.content {
+  padding: 0 4%;
+}
+
+.booklist {
+  margin: 16px;
+  margin-top: 30px;
+  list-style-type: none;
+  padding: 20px;
+  font-size: .7em;
+  background: white;
+  width: 23%;
+  border-radius: 4px;
+  -webkit-box-shadow: 3px 5px 10px 0px rgba(150,150,150,0.33); 
+  box-shadow: 3px 5px 10px 0px rgba(150,150,150,0.33);
+}
+
+.cardbook {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardbook__right {
+  margin-left: 20px;
+  font-family: 'Heebo', sans-serif;
+  line-height: 1.2em; 
+}
+
+.bookcover {
+  width: 100px;
+}
+
+.logo {
+  width: 160px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: .8em;
+}
+
+.authors, 
+.pageCount, 
+.publisher, 
+.published {
+  font-size: .7em;
+}
+
+.authors {
+  color: #AB2680;
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
+
+.pageCount,
+.publisher, 
+.published {
+  color: #999999;
+}
+
+.logoutimg {
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2% 7%;
+  padding-bottom: 0;
+}
+
+.header__left,
+.header__right {
+  display: flex;
+  align-items: center;
+}
+
+.bookstitle {
+  width: 110px;
+  margin-left: 26px;
+}
+
+.user__greeting {
+  font-size: .5em;
+}
+
+.user__greeting span:nth-child(2) {
+  font-weight: bold;
+  margin-left: 3px;
+}
+
+.logoutimg {
+  border-radius: 70px;
+  border: 1px solid rgba(51, 51, 51, 0.2);
+  width: 35px;
+  margin-left: 16px;
 }
