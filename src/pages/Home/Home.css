@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
 
 .pages-home {
+  height: 100vh;
   margin: 0 auto;
   font-size: 30px;
   background-image: url("./../../img/bg.png");
@@ -73,10 +74,6 @@
   color: #999999;
 }
 
-.logoutimg {
-  cursor: pointer;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -105,8 +102,105 @@
 }
 
 .logoutimg {
+  cursor: pointer;
   border-radius: 70px;
   border: 1px solid rgba(51, 51, 51, 0.2);
-  width: 35px;
   margin-left: 16px;
+  width: 35px;
+  padding: 4px;
+}
+
+li.page-item {
+  list-style-type: none;
+}
+
+.paginationBar {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  font-size: .5em;
+  font-family: 'Heebo', sans-serif;
+}
+
+.paginationBar span {
+  display: flex;
+  align-items: center;
+}
+
+.nextBtn,
+.prevBtn {
+  border-radius: 80px;
+  border: 1px solid rgba(51, 51, 51, 0.2);
+  width: 36px;
+  margin-left: 16px;
+  display: flex;
+}
+
+.nextBtn img,
+.prevBtn img {
+  margin: 0 auto;
+  margin-right: 13px;
+  padding: 9px 0px;
+  width: 9px;
+  height: 34px;
+}
+
+@media all and (max-width: 1366px) {
+  .booklist {
+    width: 22%;
+    font-size: .5em;
+    margin: 14px;
+    margin-top: 0;
+    padding: 12px;
+  }
+  .pages-home .content {
+    margin-top: -10px;
+  }
+  .paginationBar {
+    bottom: 2%;
+  }
+  .bookcover {
+    width: 77px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .booklist {
+    width: 100%;
+  }
+  .pages-home ul {
+    padding: 0;
+  }
+  .header__left {
+    transform: scale(.8);
+  }
+  .header {
+    padding: 3% 0;
+    padding-right: 15%;
+    padding-bottom: 0;
+  }
+  .paginationBar {
+    background-image: url("./../../img/bg.png");
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    left: -10px;
+    height: 50px;
+  }
+
+  .prevBtn {
+    order: 1;
+  }
+  .paginationBar span {
+    order: 2;
+    margin-left: 10px;
+  }
+  .nextBtn {
+    order: 3;
+  }
 }
